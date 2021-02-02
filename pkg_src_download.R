@@ -5,7 +5,12 @@ pkgs_available_cran <- available.packages(repos = "https://cran.rstudio.com")
 
 current_dir <- getwd()
 contrib_path <- paste0("file://", current_dir, "/pkgbin")
-pkgs_available_local <- available.packages(contriburl = contrib_path)
+if (file.exists(contrib_path)){
+    pkgs_available_local <- available.packages(contriburl = contrib_path)
+} else {
+    pkgs_available_local <- matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,
+				   dimnames = list(1, "Package"))
+}
 
 pkgs_input <- readLines("baufabrik_packages.txt")
 

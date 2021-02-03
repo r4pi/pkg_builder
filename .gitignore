@@ -2,6 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-pkgbin/
+pkgbinrepo/
 pkgarchive/
 tmp

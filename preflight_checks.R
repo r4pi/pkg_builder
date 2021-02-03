@@ -1,5 +1,7 @@
 #!/usr/bin/env Rscript
 
+source("config.R")
+
 # Helper functions
 
 create_dir_if_not_exist <- function(dirname){
@@ -14,7 +16,7 @@ create_dir_if_not_exist <- function(dirname){
 create_dir_if_not_exist("~/R/r4pi/")
 
 # create pkgbin
-create_dir_if_not_exist("pkgbin")
+create_dir_if_not_exist(conf_binrepo_dir)
 
 # create pkgsrc
 create_dir_if_not_exist("pkgsrc")

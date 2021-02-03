@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
-setwd("pkgbin")
+source("config.R")
+setwd(conf_binrepo_dir)
 tools::write_PACKAGES(type = "source")
 

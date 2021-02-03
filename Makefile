@@ -1,4 +1,4 @@
-all: checks install deps download build PACKAGES
+all: checks install deps download build PACKAGES html sync
 
 checks: preflight_checks.R
 	./preflight_checks.R
@@ -18,4 +18,10 @@ build: pkg_build.R
 PACKAGES: pkg_write_packages.R
 	./pkg_write_packages.R
 
-.PHONY: checks install deps download build PACKAGES
+html: write_html_packages.R
+	./write_html_packages.R
+
+sync:
+	s3cmd sync ./pkgbinrepo/ s3://pkgs.r4pi.org/
+
+.PHONY: checks install deps download build PACKAGES sync

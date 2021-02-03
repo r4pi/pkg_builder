@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 
+source("config.R")
+setwd(conf_binrepo_dir)
 
-setwd("pkgbin")
-
-pkgs <- dir(path = "../pkgsrc", full.names = TRUE)
+pkgs <- dir(path = "../../../pkgsrc", full.names = TRUE)
 
 
 for (pkg in pkgs){

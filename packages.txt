@@ -1,5 +1,6 @@
 argparser
 logger
+palmerpenguins
 plumber
 shiny
 tidyverse

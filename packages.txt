@@ -26,6 +26,7 @@ png
 pryr
 purrr
 readr
+reprex
 sessioninfo
 shiny
 stringr

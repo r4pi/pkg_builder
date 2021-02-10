@@ -2,6 +2,16 @@
 
 source("config.R")
 
+url_extract <- function(x){
+  split_x <- strsplit(x, " ", fixed=TRUE)
+  cleaned_x <- gsub(",", "", split_x[[1]])
+  is_url <- startsWith(cleaned_x, "http")
+  # cleaned_x[is_url]
+  unlist(lapply(cleaned_x[is_url], function(x){paste0('<a href="', x, '">', x, '</a>')}))
+}
+
+
+
 all_pkgs <- readLines("baufabrik_packages.txt")
 
 html_header <- c("<html>",
@@ -26,7 +36,8 @@ for (pkg in all_pkgs){
   if (is.null(pkg_description$URL)){
 	  package_url <- "None"
   } else {
-	  package_url <- strsplit(pkg_description$URL, ",")[[1]][1]
+	  #package_url <- strsplit(pkg_description$URL, ",")[[1]][1]
+    package_url <- gsub("http.[^, ]*", url_extract(pkg_description$URL), pkg_description$URL)
   }
   html_table_row <- paste0(
     "<tr>",

@@ -36,10 +36,13 @@ for (pkg in all_pkgs){
   if (is.null(pkg_description$URL)){
 	  package_url <- "None"
   } else {
-	  #package_url <- strsplit(pkg_description$URL, ",")[[1]][1]
     package_url <- gsub("http.[^, ]*", url_extract(pkg_description$URL), pkg_description$URL)
   }
-  package_bugs_url <- gsub("http.[^, ]*", url_extract(pkg_description$BugReports), pkg_description$BugReports)
+  if (is.null(pkg_description$BugReports)){
+    package_bugs_url <- "None"
+  } else {
+    package_bugs_url <- gsub("http.[^, ]*", url_extract(pkg_description$BugReports), pkg_description$BugReports)
+  }
   html_table_row <- paste0(
     "<tr>",
     "  <td>", pkg_description$Package, "</td>",

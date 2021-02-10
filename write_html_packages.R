@@ -39,13 +39,14 @@ for (pkg in all_pkgs){
 	  #package_url <- strsplit(pkg_description$URL, ",")[[1]][1]
     package_url <- gsub("http.[^, ]*", url_extract(pkg_description$URL), pkg_description$URL)
   }
+  package_bugs_url <- gsub("http.[^, ]*", url_extract(pkg_description$BugReports), pkg_description$BugReports)
   html_table_row <- paste0(
     "<tr>",
     "  <td>", pkg_description$Package, "</td>",
     "  <td>", pkg_description$Version, "</td>",
     "  <td>", pkg_description$Title, "</td>",
     "  <td>", package_url, "</td>",
-    "  <td>", pkg_description$BugReports, "</td>",
+    "  <td>", package_bugs_url, "</td>",
     "</td>"
   )
   cat(html_table_row, file = "pkgbinrepo/index.html", sep = "\n", append = TRUE)

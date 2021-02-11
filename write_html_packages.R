@@ -3,13 +3,20 @@
 source("config.R")
 
 url_extract <- function(x){
-  split_x <- strsplit(x, " ", fixed=TRUE)
+  no_cr_x <- gsub("\n", " ", x)
+  split_x <- strsplit(no_cr_x, " ", fixed=TRUE)
   cleaned_x <- gsub(",", "", split_x[[1]])
   is_url <- startsWith(cleaned_x, "http")
-  # cleaned_x[is_url]
-  unlist(lapply(cleaned_x[is_url], function(x){paste0('<a href="', x, '">', x, '</a>')}))
+  replacement <- unlist(lapply(cleaned_x[is_url], function(x){paste0('<a href="', x, '">', x, '</a>')}))
+  text <- x
+  placeholder_text <- gsub("http.[^, ]*", "PLACEHOLDER", text)
+  output_text <- placeholder_text
+  for (i in replacement){
+    output_text <- sub("PLACEHOLDER", i, output_text)
+    # cat(output_text, "\n")
+  }
+  output_text
 }
-
 
 
 all_pkgs <- readLines("baufabrik_packages.txt")
@@ -36,12 +43,12 @@ for (pkg in all_pkgs){
   if (is.null(pkg_description$URL)){
 	  package_url <- "None"
   } else {
-    package_url <- gsub("http.[^, ]*", url_extract(pkg_description$URL), pkg_description$URL)
+    package_url <- url_extract(pkg_description$URL)
   }
   if (is.null(pkg_description$BugReports)){
     package_bugs_url <- "None"
   } else {
-    package_bugs_url <- gsub("http.[^, ]*", url_extract(pkg_description$BugReports), pkg_description$BugReports)
+    package_bugs_url <- url_extract(pkg_description$BugReports)
   }
   html_table_row <- paste0(
     "<tr>",

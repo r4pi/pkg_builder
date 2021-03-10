@@ -23,10 +23,15 @@ pkg_update_available <- function(package_name, available_cran, available_local){
   if (is.na(local_version)){
     return(TRUE)
   }
-  if (cran_version == local_version){
-    FALSE
+  if ( is.na(cran_version)){
+	  cat("WARNING - Package:", package_name, "not available, skipping\n")
+	  FALSE
   } else {
-    TRUE
+    if (cran_version == local_version){
+      FALSE
+    } else {
+      TRUE
+    }
   }
 }
 

@@ -3,10 +3,13 @@
 args <- commandArgs(trailingOnly = TRUE)
 source("config.R")
 
+if (is.na(args[1])) {
+	stop("Please supply a package name to rebuild")
+}
+
 pkg <- args[1]
 
 cat("Package to build: ", pkg, "\n")
-
 
 download.packages(pkg, repos = "https://cran.rstudio.com", destdir = "pkgsrc")
 

@@ -21,9 +21,18 @@ url_extract <- function(x){
 
 all_pkgs <- readLines("baufabrik_packages.txt")
 
-html_header <- c("<html>",
+html_header <- c("<!DOCTYPE html>",
+                 "<html>",
                  "<head>",
                  "<title>r4pi - Packages</title>",
+                 "<meta name='viewport' content='width=device-width initial-scale=1.0'>",
+		 "<style>",
+		 "body {font-family: sans-serif;}",
+		 "tr:nth-child(even) {background-color: #f2f2f2;}",
+		 "tr:hover {background-color: #ffffcc;}",
+		 "th { background-color: #D9230F; color: white; }",
+		 "th, td {padding: 5px;}",
+		 "</style>",
                  "</head>",
                  "<body>",
                  "<table>",

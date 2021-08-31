@@ -10,10 +10,12 @@ package_installed <- function(pkg_name){
 }
 
 for (pkg in pkgs_input){
-  if (isFALSE(package_installed(pkg))){
-    cat("Installing package:", pkg, "\n")
-    install.packages(pkg, repos = "https://cran.rstudio.com", lib = "~/R/r4pi/")
-  } else {
-    cat("Already installed - skipping:", pkg, "\n")
+  if (!grepl("^#", pkg)){
+    if (isFALSE(package_installed(pkg))){
+      cat("Installing package:", pkg, "\n")
+      install.packages(pkg, repos = "https://cran.rstudio.com", lib = "~/R/r4pi/")
+    } else {
+      cat("Already installed - skipping:", pkg, "\n")
+    }
   }
 }

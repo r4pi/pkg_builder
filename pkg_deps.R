@@ -6,7 +6,10 @@ r["CRAN"] <- "https://cran.rstudio.com/"
 options(repos = r)
 
 # Read input file packages
-pkgs_input <- readLines("packages.txt")
+pkgs_raw <- readLines("packages.txt")
+
+# Ensure we drop any lines that start with a '#'
+pkgs_input <- pkgs_raw[c(!grepl("^#", pkgs_raw))]
 
 # Get all deps
 pkgs_deps <- unlist(tools::package_dependencies(pkgs_input, recursive = TRUE))

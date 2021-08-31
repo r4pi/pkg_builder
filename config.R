@@ -1,7 +1,7 @@
 # configuration settings
 
 # Define current R version for builds
-r_version <- "4.0.4"
+r_version <- "release"
 
 # local library path where libraries for r4pi get installed
 conf_local_libpath <- "~/R/r4pi"

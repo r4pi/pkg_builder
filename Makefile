@@ -22,6 +22,7 @@ html: write_html_packages.R
 	./write_html_packages.R
 
 sync:
-	s3cmd sync ./pkgbinrepo/ s3://pkgs.r4pi.org/
+	s3cmd sync ./pkgbinrepo/ s3://pkgs.r4pi.org/ >sync.log
+	./invalidate_cloudfront_cache.sh
 
 .PHONY: checks install deps download build PACKAGES sync

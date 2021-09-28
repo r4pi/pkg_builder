@@ -46,6 +46,7 @@ hms
 htmltools
 htmlwidgets
 httr
+httr2
 ids
 isoband
 jpeg
@@ -71,6 +72,7 @@ nycflights13
 openssl
 palmerpenguins
 pillar
+pins
 pkgconfig
 pkgdown
 plumber
@@ -128,6 +130,7 @@ vroom
 waldo
 withr
 xfun
+xgboost
 xml2
 xts
 yaml

@@ -19,7 +19,8 @@ pkgs_input <- readLines("baufabrik_packages.txt")
 pkg_update_available <- function(package_name, available_cran, available_local){
   cran_version <- available_cran[which(available_cran[,"Package"] == package_name),]["Version"]
   local_version <- available_local[which(available_local[,"Package"] == package_name),]["Version"]
-  cat("Package:", package_name, "CRAN:", cran_version, "Local:", local_version, "\n")
+  # cat("Package:", package_name, "CRAN:", cran_version, "Local:", local_version, "\n")
+  cat(sprintf("Package: %-20s CRAN: %12s       Local: %12s\n", package_name, cran_version, local_version))
   if (is.na(local_version)){
     return(TRUE)
   }

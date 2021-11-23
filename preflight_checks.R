@@ -12,6 +12,14 @@ create_dir_if_not_exist <- function(dirname){
     }
 }
 
+# Check that the output dir is mounted
+if (!file.exists("pkgbinrepo/index.html")){
+    cat("Error: Output dir is not mounted\n")
+    q(save = "no", status = 1)
+} else {
+    cat("Output dir is available...\n")
+}
+
 # create the custom install dir
 create_dir_if_not_exist("~/R/r4pi/")
 

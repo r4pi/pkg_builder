@@ -1,3 +1,4 @@
+archive
 argparser
 askpass
 base64enc
@@ -7,8 +8,11 @@ bit64
 broom
 cachem
 callr
+class
 classInt
 cli
+cluster
+codetools
 colorspace
 condvis
 config
@@ -23,11 +27,13 @@ digest
 dplyr
 dtplyr
 ellipsis
+envstat
 evaluate
 e1071
 fansi
 farver
 forcats
+foreign
 fs
 gapminder
 gargle
@@ -52,9 +58,11 @@ ids
 isoband
 jpeg
 jsonlite
+KernSmooth
 knitr
 labeling
 Lahman
+lattice
 leaflet
 lifecycle
 lintr
@@ -63,12 +71,18 @@ lubridate
 magrittr
 maps
 markdown
+MASS
+Matrix
 matrixStats
 memoise
+mgcv
 microbenchmark
 mime
 modelr
 munsell
+nhsnumber
+nlme
+nnet
 nomnoml
 nycflights13
 openssl
@@ -101,6 +115,7 @@ rlang
 rlog
 rmarkdown
 roxygen2
+rpart
 rstudioapi
 rvest
 scales
@@ -111,6 +126,7 @@ ssh
 stringi
 stringr
 styler
+survival
 sys
 testthat
 textshaping

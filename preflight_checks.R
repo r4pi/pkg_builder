@@ -8,7 +8,7 @@ create_dir_if_not_exist <- function(dirname){
     if (dir.exists(dirname)){
         cat("Directory exists:", dirname, "\n")
     } else {
-        dir.create(dirname)
+        dir.create(dirname, recursive=TRUE)
     }
 }
 

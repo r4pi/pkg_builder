@@ -23,6 +23,7 @@ data.table
 DBI
 dbplyr
 devtools
+DiagrammeR
 digest
 dplyr
 dtplyr

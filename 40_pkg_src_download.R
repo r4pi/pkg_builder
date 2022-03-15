@@ -8,7 +8,7 @@ contrib_path <- paste0("file://", current_dir, "/pkgbinrepo/src/contrib")
 if (file.exists(paste0(current_dir, "/pkgbinrepo/src/contrib/PACKAGES"))){
     pkgs_available_local <- available.packages(contriburl = contrib_path)
 } else {
-    cat("Using fake local repo as no PACKAGES found\n")
+    cat("Using fake local repo as no PACKAGES found\n", file=stdout())
     pkgs_available_local <- matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,
 				   dimnames = list(1, "Package"))
 }
@@ -20,12 +20,12 @@ pkg_update_available <- function(package_name, available_cran, available_local){
   cran_version <- available_cran[which(available_cran[,"Package"] == package_name),]["Version"]
   local_version <- available_local[which(available_local[,"Package"] == package_name),]["Version"]
   # cat("Package:", package_name, "CRAN:", cran_version, "Local:", local_version, "\n")
-  cat(sprintf("Package: %-20s CRAN: %12s       Local: %12s\n", package_name, cran_version, local_version))
+  cat(sprintf("Package: %-20s CRAN: %12s       Local: %12s\n", package_name, cran_version, local_version), file=stdout())
   if (is.na(local_version)){
     return(TRUE)
   }
   if ( is.na(cran_version)){
-	  cat("WARNING - Package:", package_name, "not available, skipping\n")
+	  cat("WARNING - Package:", package_name, "not available, skipping\n", file=stdout())
 	  FALSE
   } else {
     if (cran_version == local_version){

@@ -1,5 +1,7 @@
 #!/usr/bin/env Rscript
 
+cat("Figure out package dependencies", file=stdout())
+
 # Set deafult CRAN URL
 r <- getOption("repos")
 r["CRAN"] <- "https://cran.rstudio.com/"

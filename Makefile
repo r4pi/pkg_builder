@@ -1,28 +1,28 @@
 all: checks install deps download build PACKAGES html sync
 
-checks: preflight_checks.R
-	./preflight_checks.R
+checks: 10_preflight_checks.R
+	./10_preflight_checks.R
 
-install: packages.txt pkg_src_install.R
-	./pkg_src_install.R
+install: packages.txt 20_pkg_src_install.R
+	./20_pkg_src_install.R
 
-deps: packages.txt pkg_deps.R
-	./pkg_deps.R
+deps: packages.txt 30_pkg_deps.R
+	./30_pkg_deps.R
 
-download: baufabrik_packages.txt pkg_src_download.R
-	./pkg_src_download.R
+download: baufabrik_packages.txt 40_pkg_src_download.R
+	./40_pkg_src_download.R
 
-build: pkg_build.R
-	./pkg_build.R
+build: 50_pkg_build.R
+	./50_pkg_build.R
 
-PACKAGES: pkg_write_packages.R
-	./pkg_write_packages.R
+PACKAGES: 60_pkg_write_packages.R
+	./60_pkg_write_packages.R
 
-html: write_html_packages.R
-	./write_html_packages.R
+html: 70_write_html_packages.R
+	./70_write_html_packages.R
 
 sync:
 	s3cmd sync ./pkgbinrepo/ s3://pkgs.r4pi.org/ | tee sync.log
-	./invalidate_cloudfront_cache.sh
+	./80_invalidate_cloudfront_cache.sh
 
-.PHONY: checks install deps download build PACKAGES sync
+.PHONY: all checks install deps download build PACKAGES html sync

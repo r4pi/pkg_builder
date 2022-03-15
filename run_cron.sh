@@ -1,8 +1,20 @@
 #!/bin/bash
 
+
+date
+
+LOCAL_AWS_CF_DIST_ID=${AWS_CF_DIST_ID:-default}
+
+if [ $LOCAL_AWS_CF_DIST_ID == "default" ]; then
+	echo 'Error: $AWS_CF_DIST_ID is not set'
+	exit 1
+fi
+
+
 cd /home/pi/r4pi/packages
 
-make
+make all
+
 # Set appropriate message and priority
 if [ $? == 0 ];then
 	MESSAGE="Package build successful"
@@ -14,7 +26,7 @@ else
 	PRIORITY=1
 fi
 
-# Send the message via pushover
+echo "Send the message via pushover"
 curl -s \
   --form-string "token=aght6r9rv9qhivo8jdqu2awgbacsjt" \
   --form-string "user=uk1mrore93mx7rhftgm1d96atndxvu" \

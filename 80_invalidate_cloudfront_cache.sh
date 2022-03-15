@@ -10,4 +10,6 @@ if [ "${INTERNAL_AWS_CF_DIST_ID}" == "default" ]; then
 fi
 if grep index.html sync.log; then
   aws cloudfront create-invalidation --distribution-id "${AWS_CF_DIST_ID}" --paths /index.html
+else
+	echo "Invalidation not required"
 fi

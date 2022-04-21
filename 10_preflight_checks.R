@@ -16,7 +16,7 @@ create_dir_if_not_exist <- function(dirname){
 }
 
 # Check that the output dir is mounted
-if (!file.exists("pkgbinrepo/index.html")){
+if (!file.exists(file.path(conf_bin_dir, "index.html"))){
     cat("Error: Output dir is not mounted\n", file=stdout())
     q(save = "no", status = 1)
 } else {

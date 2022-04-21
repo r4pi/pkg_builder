@@ -17,5 +17,6 @@ pkg_binary_names <- dir(path = ".", full.names = TRUE)
 for (pkg_binary_name in pkg_binary_names){
     file.rename(pkg_binary_name, gsub("_R_armv7l-unknown-linux-gnueabihf", "", pkg_binary_name))
     file.rename(pkg_binary_name, gsub("_R_armv-unknown-linux-gnueabihf", "", pkg_binary_name))
+    file.rename(pkg_binary_name, gsub("_R_aarch64-unknown-linux-gnu", "", pkg_binary_name))
 }
 

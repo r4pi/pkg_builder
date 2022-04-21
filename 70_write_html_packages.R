@@ -44,7 +44,7 @@ html_header <- c("<!DOCTYPE html>",
                  "  <th>Bugs</th>",
                  "</tr>")
 
-cat(html_header, file = "pkgbinrepo/index.html", sep = "\n", append = FALSE)
+cat(html_header, file = file.path(conf_bin_dir, "index.html"), sep = "\n", append = FALSE)
 
 for (pkg in all_pkgs){
   pkg_description <- packageDescription(pkg, lib.loc = conf_local_libpath)
@@ -68,11 +68,11 @@ for (pkg in all_pkgs){
     "  <td>", package_bugs_url, "</td>",
     "</td>"
   )
-  cat(html_table_row, file = "pkgbinrepo/index.html", sep = "\n", append = TRUE)
+  cat(html_table_row, file = file.path(conf_bin_dir, "index.html"), sep = "\n", append = TRUE)
 }
 
 html_footer <- c("</table>",
                  "</body>",
                  "</html>")
-cat(html_footer, file = "pkgbinrepo/index.html", sep = "\n", append = TRUE)
+cat(html_footer, file = file.path(conf_bin_dir, "index.html"), sep = "\n", append = TRUE)
 

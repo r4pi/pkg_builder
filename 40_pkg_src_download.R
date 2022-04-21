@@ -1,11 +1,13 @@
 #!/usr/bin/env Rscript
 
+source("config.R")
+
 pkgs_available_cran <- available.packages(repos = "https://cran.rstudio.com")
 
 
 current_dir <- getwd()
-contrib_path <- paste0("file://", current_dir, "/pkgbinrepo/src/contrib")
-if (file.exists(paste0(current_dir, "/pkgbinrepo/src/contrib/PACKAGES"))){
+contrib_path <- paste0("file://", file.path(current_dir, conf_binrepo_dir))
+if (file.exists(file.path(current_dir, conf_binrepo_dir, "PACKAGES"))){
     pkgs_available_local <- available.packages(contriburl = contrib_path)
 } else {
     cat("Using fake local repo as no PACKAGES found\n", file=stdout())

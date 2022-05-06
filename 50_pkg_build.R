@@ -2,9 +2,9 @@
 
 source("config.R")
 setwd(conf_binrepo_dir)
-cat(paste0(timestamp(),"\n"), file="../../../build.log")
+cat(paste0(timestamp(),"\n"), file="../../../../build.log")
 
-pkgs <- dir(path = "../../../pkgsrc", full.names = TRUE)
+pkgs <- dir(path = "../../../../pkgsrc", full.names = TRUE)
 
 
 for (pkg in pkgs){

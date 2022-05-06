@@ -7,3 +7,4 @@ pkgarchive/
 tmp
 baufabrik_packages.txt
 *.log
+pkgsrc

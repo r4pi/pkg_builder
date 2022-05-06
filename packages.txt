@@ -5,6 +5,7 @@ base64enc
 BH
 bit
 bit64
+blastula
 broom
 cachem
 callr
@@ -100,6 +101,7 @@ progress
 pryr
 ps
 purrr
+pushoverr
 R6
 ragg
 rappdirs

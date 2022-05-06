@@ -11,7 +11,7 @@ if [ $LOCAL_AWS_CF_DIST_ID == "default" ]; then
 fi
 
 
-cd /home/pi/r4pi/packages
+cd /home/mds/r4pi/packages
 
 make all
 

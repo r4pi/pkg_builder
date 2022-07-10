@@ -120,11 +120,13 @@ rmarkdown
 roxygen2
 rpart
 rstudioapi
+rtweet
 rvest
 scales
 sessioninfo
 #sf
 shiny
+slackr
 ssh
 stringi
 stringr
@@ -136,6 +138,7 @@ textshaping
 tibble
 tidymodels
 tidyr
+tidyRSS
 tidyselect
 tidyverse
 tinytex
@@ -150,6 +153,7 @@ viridisLite
 vroom
 waldo
 withr
+wk
 xfun
 xgboost
 xml2

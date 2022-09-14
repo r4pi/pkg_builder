@@ -22,6 +22,7 @@ cpp11
 crayon
 crul
 curl
+cyclocomp
 DataEditR
 data.table
 DBI
@@ -66,6 +67,7 @@ httpcode
 httr
 httr2
 ids
+ini
 isoband
 jpeg
 jsonlite
@@ -127,6 +129,7 @@ rematch2
 renv
 reprex
 reticulate
+rex
 rgeos
 rjson
 rlang
@@ -146,11 +149,13 @@ shinydashboard
 shinythemes
 shinyWidgets
 slackr
+sodium
 ssh
 stringi
 stringr
 styler
 survival
+swagger
 sys
 terra
 testthat
@@ -176,12 +181,14 @@ viridisLite
 vroom
 waiter
 waldo
+webutils
 withr
 wk
 xfun
 xgboost
 xkcd
 xml2
+xmlparsedata
 xts
 yaml
 zoo

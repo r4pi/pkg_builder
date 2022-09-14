@@ -1,7 +1,10 @@
-all: checks install deps download build PACKAGES html sync
+all: checks oldBuilt install deps download build PACKAGES html sync
 
 checks: 10_preflight_checks.R
 	./10_preflight_checks.R
+
+oldBuilt:
+	./15_check_built_outdated.R
 
 install: packages.txt 20_pkg_src_install.R
 	./20_pkg_src_install.R

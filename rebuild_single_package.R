@@ -21,9 +21,11 @@ setwd(conf_binrepo_dir)
 
 pkgs <- dir(path = "../../../pkgsrc", full.names = TRUE)
 
+build_env <- c("LIBARROW_MINIMAL=FALSE", "NOT_CRAN=TRUE", "ARROW_S3=ON", "ARROW_GCS=ON", "ARROW_R_DEV=TRUE")
+
 
 for (pkg in pkgs){
-  result <- system2(r_binary, paste("--vanilla CMD INSTALL -l '~/R/r4pi/' --no-multiarch --build", pkg))
+  result <- system2(r_binary, paste("--vanilla CMD INSTALL -l '~/R/r4pi/' --no-multiarch --build", pkg), env=build_env)
   stopifnot("Build of package failed" = result == 0)
   file.rename(pkg, gsub("pkgsrc", "pkgarchive", pkg))
 }

@@ -13,7 +13,7 @@ for (pkg in pkgs){
   stopifnot("Build of package failed" = result == 0)
   file.rename(pkg, gsub("pkgsrc", "pkgarchive", pkg))
 }
-pkg_binary_names <- dir(path = ".", full.names = TRUE, pattern="*_linux_*")
+pkg_binary_names <- dir(path = ".", full.names = TRUE, pattern="*-linux-*")
 for (pkg_binary_name in pkg_binary_names){
     file.rename(pkg_binary_name, gsub("_R_armv7l-unknown-linux-gnueabihf", "", pkg_binary_name))
     file.rename(pkg_binary_name, gsub("_R_armv-unknown-linux-gnueabihf", "", pkg_binary_name))

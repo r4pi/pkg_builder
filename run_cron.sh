@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 date
 
 ARCH=$(uname -m)
@@ -19,9 +18,11 @@ make all
 
 # Set appropriate message and priority
 if [ $? == 0 ];then
-	MESSAGE="(${ARCH}) "
+	SUCCESS="$(grep "successfully" build.log)"
+    FAILURE="$(grep "failed" build.log)"
+    UPLOAD="$(grep "tar.gz" sync.log | wc -l) uploaded"
+    MESSAGE="(${ARCH}) ${SUCCESS} | ${FAILURE} | ${UPLOAD}"
 	PRIORITY=0
-	NUM_PACKAGES="Number of packages this build: $(grep "tar.gz" sync.log | wc -l)"
 else
 	MESSAGE="(${ARCH}) Package build failed!"
 	PRIORITY=1
@@ -31,6 +32,6 @@ echo "Send the message via pushover"
 curl -s \
   --form-string "token=${PUSHOVER_TOKEN}" \
   --form-string "user=${PUSHOVER_USER}" \
-  --form-string "message=${MESSAGE}${NUM_PACKAGES}" \
+  --form-string "message=${MESSAGE}" \
   --form-string "priority=${PRIORITY}" \
   https://api.pushover.net/1/messages.json

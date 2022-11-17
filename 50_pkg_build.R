@@ -16,15 +16,13 @@ for (pkg in pkgs){
 
 result <- ifelse(result == 0, FALSE, TRUE)
 
-cat(paste(sum(!result), "package(s) build successfully\n"),
+cat(paste(sum(!result), "package(s) built successfully\n"),
     file = "../../../../build.log",
     append = TRUE)
 
-if (sum(result) > 0) {
-    cat(paste0(sum(result), " package builds failed (", paste(pkgs[result], collapse = ", "), ") \n"),
-        file = "../../../../build.log",
-        append = TRUE)
-}
+cat(paste0(sum(result), " package builds failed (", paste(pkgs[result], collapse = ", "), ") \n"),
+    file = "../../../../build.log",
+    append = TRUE)
 
 pkg_binary_names <- dir(path = ".", full.names = TRUE, pattern="*-linux-*")
 

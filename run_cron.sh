@@ -18,13 +18,17 @@ make all
 
 # Set appropriate message and priority
 if [ $? == 0 ];then
-	SUCCESS="$(grep "successfully" build.log)"
+    SUCCESS="$(grep "successfully" build.log)"
     FAILURE="$(grep "failed" build.log)"
     UPLOAD="$(grep "tar.gz" sync.log | wc -l) uploaded"
     MESSAGE="(${ARCH}) ${SUCCESS} | ${FAILURE} | ${UPLOAD}"
-	PRIORITY=0
+    if [ ${FAILURE:0:1} != "0" ] ; then
+	PRIORITY=1
+    else
+        PRIORITY=0
+    fi
 else
-	MESSAGE="(${ARCH}) Package build failed!"
+	MESSAGE="(${ARCH}) Package build pipeline failed!"
 	PRIORITY=1
 fi
 

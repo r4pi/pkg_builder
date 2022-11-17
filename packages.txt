@@ -217,6 +217,7 @@ rpart
 rprojroot
 rsample
 rstudioapi
+rtoot
 Rttf2pt1
 rtweet
 R.utils

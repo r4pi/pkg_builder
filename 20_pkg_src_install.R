@@ -6,7 +6,7 @@ pkgs_input <- readLines("packages.txt")
 update.packages(repos = "https://cran.rstudio.com", ask = FALSE, lib.loc = "~/R/r4pi/", instlib = "~/R/r4pi/")
 
 package_installed <- function(pkg_name){
-  pkg_name %in% rownames(installed.packages(lib.loc = "~/R/r4pi/"))
+    pkg_name %in% rownames(installed.packages(lib.loc = "~/R/r4pi/"))
 }
 
 for (pkg in pkgs_input){

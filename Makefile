@@ -1,10 +1,13 @@
-all: pipeline-start checks oldBuilt install deps download build PACKAGES html sync pipeline-stop
+all: pipeline-start generate-package-list checks oldBuilt install deps download build PACKAGES html sync pipeline-stop
 
 pipeline-start: 01_is_running.sh
 	./01_is_running.sh start
 
 pipeline-stop: 01_is_running.sh
 	./01_is_running.sh stop
+
+generate-package-list: packages.cfg
+	./list_packages > packages.txt
 
 checks: 10_preflight_checks.R
 	./10_preflight_checks.R

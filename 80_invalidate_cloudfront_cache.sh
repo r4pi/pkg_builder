@@ -12,7 +12,10 @@ fi
 if grep index.html sync.log; then
     aws cloudfront create-invalidation \
         --distribution-id "${AWS_CF_DIST_ID}" \
-        --paths /${ARCH}/index.html /${ARCH}/src/contrib/PACKAGES /${ARCH}/src/contrib/PACKAGES.gz
+        --paths /${ARCH}/index.html \
+	        /${ARCH}/src/contrib/PACKAGES \
+	        /${ARCH}/src/contrib/PACKAGES.rds \
+		/${ARCH}/src/contrib/PACKAGES.gz
 else
 	echo "Invalidation not required"
 fi

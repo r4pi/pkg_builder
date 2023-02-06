@@ -5,7 +5,7 @@ set -euo pipefail
 INPUT=${1:-default}
 
 function help(){
-    echo "Error: please run with either start or stop"
+    echo "Error: please run with start, stop or status"
     exit 1
 }
 

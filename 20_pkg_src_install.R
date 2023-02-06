@@ -1,9 +1,14 @@
 #!/usr/bin/env Rscript
 
-# Read input file packages
-pkgs_input <- readLines("packages.txt")
 
-update.packages(repos = "https://cran.rstudio.com", ask = FALSE, lib.loc = "~/R/r4pi/", instlib = "~/R/r4pi/")
+cat("-- Updating installed packages\n")
+update.packages(repos = "https://cran.rstudio.com",
+		ask = FALSE,
+		lib.loc = "~/R/r4pi/",
+		instlib = "~/R/r4pi/")
+
+cat("-- Detecting and installing new packages\n")
+pkgs_input <- readLines("packages.txt")
 
 package_installed <- function(pkg_name){
     pkg_name %in% rownames(installed.packages(lib.loc = "~/R/r4pi/"))

@@ -15,9 +15,11 @@ create_dir_if_not_exist <- function(dirname){
     }
 }
 
-# Check that the output dir is mounted
-if (!file.exists(file.path(conf_bin_dir, "index.html"))){
-    cat("Error: Output dir is not mounted\n", file=stdout())
+# Check that the output dir is available
+check_path <- file.path(conf_bin_dir, "index.html")
+cat(paste0("Checking for file: ", check_path, "\n"))
+if (!file.exists(check_path)){
+    cat("Error: Output dir is not available\n", file=stdout())
     q(save = "no", status = 1)
 } else {
     cat("Output dir is available...\n", file=stdout())

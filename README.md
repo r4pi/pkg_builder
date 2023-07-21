@@ -1,66 +1,17 @@
-# baufabrik
+# R4Pi Package builder toolchain
 
 R package build factory
 
-## Notes
+## Requirements
 
-devtools::build() can do this
+* env var AWS_CF_DIST_ID is cloudfront distribution ID
+* s3cmd config
+* aws config
+* Vars for pushover.net
 
-or do it yourself:
+## Run the pipeline
 
-```{r}
-system2("R", "CMD", "INSTALL", "--build", pkg_name)
-```
+To run interactively use `make all`.
 
-there are options to skip builds of some types of docs
+The cron wrapper, `run_cron.sh`, that sends completion messages via pushover.net.
 
-## todo
-
-* automate package downloads as required
-
-if the CRAN version newer than our local version?
-if so, download the source and then build it
-
-
-* build binary packages
-
-```
-devtools::build(
-  pkg = ".",
-  path = NULL,
-  binary = FALSE,
-  vignettes = TRUE,
-  manual = FALSE,
-  args = NULL,
-  quiet = FALSE,
-  ...
-)
-```
-
-eg.
-
-```{r}
-devtools::build(
-  pkg = "pkgsrc/dplyr_1.0.3.tar.gz",
-  path = NULL,
-  binary = TRUE,
-  vignettes = TRUE,
-  manual = FALSE,
-  args = NULL,
-  quiet = FALSE
-)
-```
-
-* Copy the files off somewhere
-
-```{r}
-file.rename("pkgsrc/dplyr_1.0.3.tgz", "pkgbin/dplyr_1.0.3.tgz")
-```
-
-* write packages file
-
-```{r}
-tools::write_PACKAGES(".", type = "mac.binary", verbose = TRUE)
-```
-
-* publish! (sync with s3? CDN)

@@ -1,0 +1,6 @@
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+03 0,8,11,14,17,20 * * * /home/r4pi/pkg_builder/run_cron.sh 2>&1 >/home/r4pi/packages/cron.log
+

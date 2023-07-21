@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-cat("Figure out package dependencies", file=stdout())
+cat("Figure out package dependencies", file = stdout())
 
 # Set deafult CRAN URL
 r <- getOption("repos")
@@ -23,7 +23,7 @@ pkgs_all_unsorted <- c(pkgs_input, pkgs_deps)
 pkgs_all <- sort(unique(pkgs_all_unsorted))
 
 # Get all the base packages
-pkgs_base <- rownames(installed.packages(priority="base"))
+pkgs_base <- rownames(installed.packages(priority = "base"))
 
 # Remove base packages from the final output
 pkgs_no_base <- setdiff(pkgs_all, pkgs_base)

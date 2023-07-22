@@ -5,6 +5,7 @@ pipeline-start: 01_is_running.sh
 
 pipeline-stop: 01_is_running.sh
 	./01_is_running.sh stop
+	rm packages.txt
 
 packages.txt: packages.cfg list_packages
 	./list_packages > packages.txt

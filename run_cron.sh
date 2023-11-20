@@ -12,7 +12,7 @@ if [ $LOCAL_AWS_CF_DIST_ID == "default" ]; then
 fi
 
 
-cd /home/mds/r4pi/packages
+cd /home/mds/r4pi/pkg_builder
 
 make all
 
@@ -21,14 +21,14 @@ if [ $? == 0 ];then
     SUCCESS="$(grep "successfully" build.log)"
     FAILURE="$(grep "failed" build.log)"
     UPLOAD="$(grep "tar.gz" sync.log | wc -l) uploaded"
-    MESSAGE="(${ARCH}) ${SUCCESS} | ${FAILURE} | ${UPLOAD}"
+    MESSAGE="($(hostname)-${ARCH}) ${SUCCESS} | ${FAILURE} | ${UPLOAD}"
     if [ ${FAILURE:0:1} != "0" ] ; then
 	PRIORITY=1
     else
         PRIORITY=0
     fi
 else
-	MESSAGE="(${ARCH}) Package build pipeline failed!"
+    MESSAGE="($(hostname)-${ARCH}) Package build pipeline failed!"
 	PRIORITY=1
 fi
 

@@ -21,7 +21,7 @@ conf_bin_dir <- file.path(
 
 conf_binrepo_dir <- file.path(
   "pkgbinrepo",
-  R.Version()$arch,
+  repo_dir,
   "src",
   "contrib"
 )

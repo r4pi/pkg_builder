@@ -52,7 +52,7 @@ cat(html_header, file = file.path(conf_bin_dir, "index.html"), sep = "\n", appen
 
 for (pkg in all_pkgs) {
   pkg_description <- packageDescription(pkg, lib.loc = conf_local_libpath)
-  cat("Package:", pkg_description$Package, "\n")
+  cat("Generating HTML for package:", pkg_description$Package, "\n")
   if (is.null(pkg_description$URL)) {
     package_url <- "None"
   } else {

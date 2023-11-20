@@ -9,3 +9,5 @@ baufabrik_packages.txt
 *.log
 pkgsrc
 packages.txt
+all_built_pkgs.txt
+is_running.lock

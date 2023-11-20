@@ -38,4 +38,7 @@ sync:
 	./75_repo_sync.sh
 	./80_invalidate_cloudfront_cache.sh
 
+clean:
+	-rm is_running.lock
+
 .PHONY: all checks install deps download build PACKAGES html sync

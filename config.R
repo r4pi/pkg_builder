@@ -6,10 +6,17 @@ r_version <- "release"
 # local library path where libraries for r4pi get installed
 conf_local_libpath <- "~/R/r4pi"
 
-# pkg repo director location
+# Hopefully temporary patch as we move away from 32 bit support
+if ( Sys.info()["nodename"] == "buildberry3" ){
+    repo_dir <- "bookworm"
+} else {
+    repo_dir <- R.Version()$arch
+}
+
+# pkg repo directory location
 conf_bin_dir <- file.path(
   "pkgbinrepo",
-  R.Version()$arch
+  repo_dir
 )
 
 conf_binrepo_dir <- file.path(

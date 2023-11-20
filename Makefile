@@ -35,7 +35,7 @@ html: 70_write_html_packages.R
 	./70_write_html_packages.R
 
 sync:
-	s3cmd sync ./pkgbinrepo/ s3://pkgs.r4pi.org/ | tee sync.log
+	./75_repo_sync.sh
 	./80_invalidate_cloudfront_cache.sh
 
 .PHONY: all checks install deps download build PACKAGES html sync

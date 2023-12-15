@@ -1,7 +1,7 @@
 #!/bin/bash
 
 date
-
+source /etc/os-release
 ARCH=$(uname -m)
 
 LOCAL_AWS_CF_DIST_ID=${AWS_CF_DIST_ID:-default}
@@ -39,3 +39,30 @@ curl -s \
   --form-string "message=${MESSAGE}" \
   --form-string "priority=${PRIORITY}" \
   https://api.pushover.net/1/messages.json
+
+# send status to the r4pi status service
+if [ "$PRIORITY" == 0 ]; then
+    STATUS_MSG="Sucess"
+else
+    STATUS_MSG="Failed"
+fi
+
+REV=$(curl -s -u ${R4PI_STATUS_USER}:${R4PI_STATUS_PASS} http://moby:5984/r4pi_status/$(hostname) | jq -r "._rev")
+echo ${REV}
+if [ "$REV" == "null" ]; then
+    REV_STR=""
+else
+    REV_STR=", \"_rev\":\"${REV}\""
+fi
+
+DATA_STRING="{\"builder\":\"$(hostname)\", \"arch\":\"$(uname -m)\", \"codename\":\"${VERSION_CODENAME}\", \"timestamp\":\"$(date -Iseconds)\", \"status\":\"${STATUS_MSG}\"${REV_STR}}"
+echo ${DATA_STRING}
+COUCH_DOC="http://moby:5984/r4pi_status/$(hostname)"
+echo ${COUCH_DOC}
+
+curl -vvv -s \
+    -u ${R4PI_STATUS_USER}:${R4PI_STATUS_PASS} \
+    -X PUT \
+    --data "${DATA_STRING}" \
+    ${COUCH_DOC}
+

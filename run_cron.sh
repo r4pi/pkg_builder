@@ -42,7 +42,7 @@ curl -s \
 
 # send status to the r4pi status service
 if [ "$PRIORITY" == 0 ]; then
-    STATUS_MSG="Sucess"
+    STATUS_MSG="Success"
 else
     STATUS_MSG="Failed"
 fi

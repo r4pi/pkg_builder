@@ -14,7 +14,7 @@ fi
 
 cd /home/mds/r4pi/pkg_builder
 
-make all
+screen make all
 
 # Set appropriate message and priority
 if [ $? == 0 ];then

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script to help manage package lists across multiple architectures
+Script to help manage package lists across multiple architectures and OSes
 """
 
 import argparse
@@ -12,7 +12,7 @@ parser.add_argument(
     "-a",
     "--arch",
     default=None,
-    help="force a specific architecture. Default uses host arch.",
+    help="force a specific architecture or OS. Default uses host arch.",
 )
 parser.add_argument(
     "-v",
@@ -28,10 +28,18 @@ config.optionxform = str
 
 config.read("packages.cfg")
 
+# Calculate the additional package set to use.
+# This is either "armv7l" or, for 64 bit archtectures, the OS codename
+# eg. bookworm or noble
 if args.arch is None:
     pkg_arch = platform.machine()
 else:
     pkg_arch = args.arch
+
+if pkg_arch == "aarch64":
+    additional_packages = platform.freedesktop_os_release()["VERSION_CODENAME"]
+else:
+    additional_packages = pkg_arch
 
 if args.verbose is True:
     print("# Printing packages for all architectures")
@@ -39,9 +47,9 @@ for package in config["all"]:
     print(package)
 
 if args.verbose is True:
-    print("# Printing packages for architecture: {}".format(pkg_arch))
+    print(f"# Printing additional packages for: {additional_packages}")
 try:
-    for arch_package in config[pkg_arch]:
+    for arch_package in config[additional_packages]:
         print(arch_package)
 except KeyError:
     if args.verbose is True:

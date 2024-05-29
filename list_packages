@@ -37,7 +37,11 @@ else:
     pkg_arch = args.arch
 
 if pkg_arch == "aarch64":
-    additional_packages = platform.freedesktop_os_release()["VERSION_CODENAME"]
+    # Default python 3 for Raspberry Pi OS < bookworm did not include freedesktop_os_release
+    try:
+        additional_packages = platform.freedesktop_os_release()["VERSION_CODENAME"]
+    except AttributeError:
+        additional_packages = "aarch64"
 else:
     additional_packages = pkg_arch
 

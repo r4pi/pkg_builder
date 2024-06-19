@@ -12,6 +12,10 @@ if [ $LOCAL_AWS_CF_DIST_ID == "default" ]; then
 fi
 
 
+# Strip compiled binaries of debug symbols (makes them smaller)
+# See discussion here: https://github.com/rocker-org/rocker-versioned2/issues/340
+export _R_SHLIB_STRIP_=true
+
 cd /home/mds/r4pi/pkg_builder
 
 make all

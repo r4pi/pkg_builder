@@ -1,6 +1,7 @@
-# 
-# For more information see the manual pages of crontab(5) and cron(8)
-# 
 # m h  dom mon dow   command
-03 0,8,11,14,17,20 * * * /home/r4pi/pkg_builder/run_cron.sh 2>&1 >/home/r4pi/packages/cron.log
+03 0,8,11,14,17,20 * * * /home/mds/r4pi/pkg_builder/run_cron.sh 2>&1 >/home/mds/r4pi/pkg_builder/cron.log
+# Use this one for diagnostics
+# */15 * * * *  /home/pi/r4pi/packages/run_cron.sh 2>&1 >>/home/pi/r4pi_packages.log
+# r4pi ubuntu scheduled package builds
+30 3 * * * /home/mds/r4pi_ubuntu/run_cron.sh 2>&1 >/home/mds/r4pi_ubuntu/cron.log
 

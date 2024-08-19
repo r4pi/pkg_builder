@@ -16,6 +16,7 @@ if ( identical(current_all_built_pkgs, previous_all_built_pkgs)){
 } else {
     writeLines(current_all_built_pkgs, "all_built_pkgs.txt")
     setwd(conf_binrepo_dir)
-    tools::write_PACKAGES(type = "source", verbose = TRUE)
+    # tools::write_PACKAGES(type = "source", verbose = TRUE)
+    tools::update_PACKAGES(type = "source", verbose = TRUE)
 }
 

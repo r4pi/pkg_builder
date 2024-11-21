@@ -6,6 +6,7 @@ Script to help manage package lists across multiple architectures and OSes
 import argparse
 import configparser
 import platform
+import sys
 
 parser = argparse.ArgumentParser(description="Output the package list.")
 parser.add_argument(
@@ -15,6 +16,12 @@ parser.add_argument(
     help="force a specific architecture or OS. Default uses host arch.",
 )
 parser.add_argument(
+    "-c",
+    "--config",
+    action="store_true",
+    help="Display the current system configuration. (arch and version codename)",
+)
+parser.add_argument(
     "-v",
     "--verbose",
     action="store_true",
@@ -22,6 +29,13 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+if args.config:
+    print("Arch:      {}".format(platform.machine()))
+    print("Codename:  {}".format(platform.freedesktop_os_release()["VERSION_CODENAME"]))
+    sys.exit(0)
+
+
 
 config = configparser.RawConfigParser(allow_no_value=True)
 config.optionxform = str

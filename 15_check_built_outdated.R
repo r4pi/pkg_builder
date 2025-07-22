@@ -25,7 +25,8 @@ version_mismatch <- function(package) {
 
 VERSIONS_MATCH <- unlist(lapply(INSTALLED_PACKAGES[, "Built"], version_mismatch))
 
-OUTDATED_PACKAGES <- INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]
+# Only grab the first n packages that are outdated
+OUTDATED_PACKAGES <- head(INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH], num_remove)
 
 remove.packages(OUTDATED_PACKAGES, lib = "~/R/r4pi")
 INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]
@@ -39,7 +40,7 @@ marked_for_removal <- apply(pkgs_versions, 1, function(x) {
   paste0(x[1], "_", x[2], ".tar.gz")
 })
 
-for (package in marked_for_removal) {
+for (package in head(marked_for_removal, num_remove)) {
   # cat(package)
   pkg_full_path <- file.path(conf_binrepo_dir, package)
   cat("Removing file: ", pkg_full_path, "\n")

@@ -44,6 +44,11 @@ curl -s \
   --form-string "priority=${PRIORITY}" \
   https://api.pushover.net/1/messages.json
 
+# Exit here until the status service is rebuilt
+echo "#######################################################"
+echo "             Skipping status updates"
+echo "#######################################################"
+exit 0
 # send status to the r4pi status service
 if [ "$PRIORITY" == 0 ]; then
     STATUS_MSG="Success"
@@ -64,9 +69,9 @@ echo ${DATA_STRING}
 COUCH_DOC="http://moby:5984/r4pi_status/$(hostname)"
 echo ${COUCH_DOC}
 
-curl -vvv -s \
-    -u ${R4PI_STATUS_USER}:${R4PI_STATUS_PASS} \
-    -X PUT \
-    --data "${DATA_STRING}" \
-    ${COUCH_DOC}
+# curl -vvv -s \
+#     -u ${R4PI_STATUS_USER}:${R4PI_STATUS_PASS} \
+#     -X PUT \
+#     --data "${DATA_STRING}" \
+#     ${COUCH_DOC}
 

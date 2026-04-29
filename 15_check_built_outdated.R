@@ -26,7 +26,7 @@ version_mismatch <- function(package) {
 VERSIONS_MATCH <- unlist(lapply(INSTALLED_PACKAGES[, "Built"], version_mismatch))
 
 # Only grab the first n packages that are outdated
-OUTDATED_PACKAGES <- head(INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH], num_remove)
+OUTDATED_PACKAGES <- sample(INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH], num_remove)
 
 remove.packages(OUTDATED_PACKAGES, lib = "~/R/r4pi")
 INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]

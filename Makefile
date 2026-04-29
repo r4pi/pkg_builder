@@ -38,6 +38,9 @@ sync:
 	./75_repo_sync.sh
 	./80_invalidate_cloudfront_cache.sh
 
+lock:
+	touch is_running.lock
+
 clean:
 	-rm is_running.lock
 

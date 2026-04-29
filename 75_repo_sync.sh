@@ -6,6 +6,11 @@ if [ $(hostname) == "buildberry3" ]; then
     s3cmd sync ./pkgbinrepo/bookworm/ s3://pkgs.r4pi.org/bookworm/ | tee sync.log
 elif [ $(hostname) == "buildberry4" ]; then
     s3cmd sync ./pkgbinrepo/aarch64/ s3://pkgs.r4pi.org/noble/ | tee sync.log
+elif [ $(hostname) == "bbtrixie" ]; then
+    s3cmd sync ./pkgbinrepo/aarch64/ s3://pkgs.r4pi.org/trixie/ | tee sync.log
 else
-    s3cmd sync ./pkgbinrepo/ s3://pkgs.r4pi.org/ | tee sync.log
+    echo "Unknown hostname: $(hostname)"
+    echo "  Please check and try again."
+    exit 1
+    # s3cmd sync ./pkgbinrepo/ s3://pkgs.r4pi.org/ | tee sync.log
 fi

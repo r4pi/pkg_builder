@@ -7,7 +7,7 @@ do
     if [ -f is_running.lock ]; then
         rm is_running.lock
     fi
-    ./run_cron.sh 2>&1 >> cron.log
+    ./run_cron.sh | tee -a cron.log
     sleep $(shuf -i 1-120 -n 1)
 done
 

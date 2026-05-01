@@ -31,10 +31,12 @@ OUTDATED_PACKAGES <- sample(INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH], num
 remove.packages(OUTDATED_PACKAGES, lib = "~/R/r4pi")
 INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]
 
-pkgs_versions <- data.frame(
+all_pkgs_versions <- data.frame(
   "Package" = INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH],
   "Version" = INSTALLED_PACKAGES[, "Version"][VERSIONS_MATCH]
 )
+
+pkgs_versions <- subset(all_pkgs_versions, Package %in% OUTDATED_PACKAGES)
 
 marked_for_removal <- apply(pkgs_versions, 1, function(x) {
   paste0(x[1], "_", x[2], ".tar.gz")

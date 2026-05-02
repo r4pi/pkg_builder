@@ -25,6 +25,8 @@ version_mismatch <- function(package) {
 
 VERSIONS_MATCH <- unlist(lapply(INSTALLED_PACKAGES[, "Built"], version_mismatch))
 
+cat("Outdated packages:", INSTALLED_PACKAGES[,"Package"][VERSIONS_MATCH], "\n")
+
 # Only grab the first n packages that are outdated
 OUTDATED_PACKAGES <- sample(INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH], num_remove)
 
@@ -44,7 +46,16 @@ marked_for_removal <- apply(pkgs_versions, 1, function(x) {
 
 for (package in head(marked_for_removal, num_remove)) {
   # cat(package)
-  pkg_full_path <- file.path(conf_binrepo_dir, package)
-  cat("Removing file: ", pkg_full_path, "\n")
-  unlink(pkg_full_path)
+    ifFalse(
+        startsWith(
+            x = packageDescription(
+                    package,
+                    lib.loc="~/R/r4pi/"
+                    )$Built,
+                prefix = paste("R", CURRENT_R_VERSION)
+                )) {
+       pkg_full_path <- file.path(conf_binrepo_dir, package)
+       cat("Removing file: ", pkg_full_path, "\n")
+       unlink(pkg_full_path)
+    }
 }

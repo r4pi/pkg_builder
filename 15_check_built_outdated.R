@@ -46,7 +46,7 @@ marked_for_removal <- apply(pkgs_versions, 1, function(x) {
 
 for (package in head(marked_for_removal, num_remove)) {
   # cat(package)
-    ifFalse(
+    if(
         startsWith(
             x = packageDescription(
                     package,

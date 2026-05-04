@@ -9,6 +9,12 @@
 
 cat("Checking for outdated builds of packages\n")
 
+warning("
+This script has become extremely messy over time and urgently needs
+to be refactored in order to improve both readability and 
+maintainability. This should be completed _before_ R 4.6.1 is realeased.
+")
+
 source("config.R")
 
 CURRENT_R_VERSION <- paste(R.Version()[c("major", "minor")], collapse = ".")
@@ -48,16 +54,17 @@ for (package in head(marked_for_removal, num_remove)) {
     cat(package)
     package_name <- strsplit(package, "_")[[1]][1]
     if(
-        startsWith(
+       !startsWith(
             x = packageDescription(
                     package_name,
                     lib.loc="~/R/r4pi/"
                     )$Built,
                 prefix = paste("R", CURRENT_R_VERSION)
                 )) {
+       remove.packages(package_name, lib = "~/R/r4pi")
        pkg_full_path <- file.path(conf_binrepo_dir, package)
-        remove.packages(package_name, lib = "~/R/r4pi")
        cat("Removing file: ", pkg_full_path, "\n")
        unlink(pkg_full_path)
     }
 }
+

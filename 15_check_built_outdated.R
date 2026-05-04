@@ -56,7 +56,7 @@ for (package in head(marked_for_removal, num_remove)) {
                 prefix = paste("R", CURRENT_R_VERSION)
                 )) {
        pkg_full_path <- file.path(conf_binrepo_dir, package)
-        remove.packages(OUTDATED_PACKAGES, lib = "~/R/r4pi")
+        remove.packages(package_name, lib = "~/R/r4pi")
        cat("Removing file: ", pkg_full_path, "\n")
        unlink(pkg_full_path)
     }

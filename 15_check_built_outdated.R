@@ -19,16 +19,11 @@ source("config.R")
 
 CURRENT_R_VERSION <- paste(R.Version()[c("major", "minor")], collapse = ".")
 
-INSTALLED_PACKAGES <- installed.packages(lib.loc = "~/R/r4pi")
+INSTALLED_PACKAGES <- installed.packages(lib.loc = "~/R/r4pi")[,c("Package", "Built")]
 
 version_mismatch <- function(build_string) {
-    
-  if (startsWith(x = paste("R", CURRENT_R_VERSION), prefix=build_string)) {
-    FALSE
-  } else {
-    TRUE
+  !startsWith(x = paste("R", CURRENT_R_VERSION), prefix=build_string)
   }
-}
 
 VERSIONS_MATCH <- unlist(lapply(INSTALLED_PACKAGES[, "Built"], version_mismatch))
 
@@ -37,7 +32,7 @@ cat("Outdated packages:", INSTALLED_PACKAGES[,"Package"][VERSIONS_MATCH], "\n")
 # Only grab the first n packages that are outdated
 OUTDATED_PACKAGES <- sample(INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH], num_remove)
 
-INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]
+# INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]
 
 all_pkgs_versions <- data.frame(
   "Package" = INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH],

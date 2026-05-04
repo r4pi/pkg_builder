@@ -65,6 +65,8 @@ for (package in head(marked_for_removal, num_remove)) {
        pkg_full_path <- file.path(conf_binrepo_dir, package)
        cat("Removing file: ", pkg_full_path, "\n")
        unlink(pkg_full_path)
-    }
+       } else {
+         cat("Not deleting package: ", package_name, "\n")
+        }
 }
 

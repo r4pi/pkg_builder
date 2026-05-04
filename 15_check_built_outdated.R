@@ -30,7 +30,6 @@ cat("Outdated packages:", INSTALLED_PACKAGES[,"Package"][VERSIONS_MATCH], "\n")
 # Only grab the first n packages that are outdated
 OUTDATED_PACKAGES <- sample(INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH], num_remove)
 
-remove.packages(OUTDATED_PACKAGES, lib = "~/R/r4pi")
 INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]
 
 all_pkgs_versions <- data.frame(
@@ -43,18 +42,21 @@ pkgs_versions <- subset(all_pkgs_versions, Package %in% OUTDATED_PACKAGES)
 marked_for_removal <- apply(pkgs_versions, 1, function(x) {
   paste0(x[1], "_", x[2], ".tar.gz")
 })
+marked_for_removal
 
 for (package in head(marked_for_removal, num_remove)) {
-  # cat(package)
+    cat(package)
+    package_name <- strsplit(package, "_")[[1]][1]
     if(
         startsWith(
             x = packageDescription(
-                    package,
+                    package_name,
                     lib.loc="~/R/r4pi/"
                     )$Built,
                 prefix = paste("R", CURRENT_R_VERSION)
                 )) {
        pkg_full_path <- file.path(conf_binrepo_dir, package)
+        remove.packages(OUTDATED_PACKAGES, lib = "~/R/r4pi")
        cat("Removing file: ", pkg_full_path, "\n")
        unlink(pkg_full_path)
     }

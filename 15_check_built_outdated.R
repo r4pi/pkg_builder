@@ -23,9 +23,9 @@ INSTALLED_PACKAGES <- installed.packages(lib.loc = "~/R/r4pi")
 
 version_mismatch <- function(package) {
   if (package == CURRENT_R_VERSION) {
-    TRUE
-  } else {
     FALSE
+  } else {
+    TRUE
   }
 }
 

@@ -21,8 +21,9 @@ CURRENT_R_VERSION <- paste(R.Version()[c("major", "minor")], collapse = ".")
 
 INSTALLED_PACKAGES <- installed.packages(lib.loc = "~/R/r4pi")
 
-version_mismatch <- function(package) {
-  if (package == CURRENT_R_VERSION) {
+version_mismatch <- function(build_string) {
+    
+  if (startsWith(x = paste("R", CURRENT_R_VERSION), prefix=build_string)) {
     FALSE
   } else {
     TRUE

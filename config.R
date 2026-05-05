@@ -7,7 +7,7 @@ r_version <- "release"
 conf_local_libpath <- "~/R/r4pi"
 
 # Number of packages to remove at once when a new R version is released
-num_remove <- 20
+num_remove <- 10
 
 # Hopefully temporary patch as we move away from 32 bit support
 if ( Sys.info()["nodename"] == "buildberry3" ){

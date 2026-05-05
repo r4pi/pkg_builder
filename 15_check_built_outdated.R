@@ -27,7 +27,11 @@ ALL_OUTDATED_PACKAGES <- INSTALLED_PACKAGES[!startsWith(INSTALLED_PACKAGES$Built
 cat("Outdated packages:\n")
 ALL_OUTDATED_PACKAGES
 # Only grab the first n packages that are outdated
+if (nrow(OUTDATED_PACKAGES > num_remove) {
 OUTDATED_PACKAGES <- ALL_OUTDATED_PACKAGES[sample(nrow(ALL_OUTDATED_PACKAGES), num_remove), ]
+} else {
+    OUTDATED_PACKAGES <- ALL_OUTDATED_PACKAGES
+}
 
 
 marked_for_removal <- apply(OUTDATED_PACKAGES, 1, function(x) {

@@ -9,12 +9,6 @@
 
 cat("Checking for outdated builds of packages\n")
 
-warning("
-This script has become extremely messy over time and urgently needs
-to be refactored in order to improve both readability and 
-maintainability. This should be completed _before_ R 4.6.1 is realeased.
-")
-
 source("config.R")
 
 CURRENT_R_VERSION <- paste(R.Version()[c("major", "minor")], collapse = ".")
@@ -27,8 +21,8 @@ ALL_OUTDATED_PACKAGES <- INSTALLED_PACKAGES[!startsWith(INSTALLED_PACKAGES$Built
 cat("Outdated packages:\n")
 ALL_OUTDATED_PACKAGES
 # Only grab the first n packages that are outdated
-if (nrow(OUTDATED_PACKAGES > num_remove) {
-OUTDATED_PACKAGES <- ALL_OUTDATED_PACKAGES[sample(nrow(ALL_OUTDATED_PACKAGES), num_remove), ]
+if (nrow(ALL_OUTDATED_PACKAGES) > num_remove) {
+    OUTDATED_PACKAGES <- ALL_OUTDATED_PACKAGES[sample(nrow(ALL_OUTDATED_PACKAGES), num_remove), ]
 } else {
     OUTDATED_PACKAGES <- ALL_OUTDATED_PACKAGES
 }

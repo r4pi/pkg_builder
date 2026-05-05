@@ -19,30 +19,19 @@ source("config.R")
 
 CURRENT_R_VERSION <- paste(R.Version()[c("major", "minor")], collapse = ".")
 
-INSTALLED_PACKAGES <- installed.packages(lib.loc = "~/R/r4pi")[,c("Package", "Built", "Version")]
-
-version_mismatch <- function(build_string) {
-  !startsWith(x = paste("R", CURRENT_R_VERSION), prefix=build_string)
-  }
-
-VERSIONS_MATCH <- unlist(lapply(INSTALLED_PACKAGES[, "Built"], version_mismatch))
+INSTALLED_PACKAGES <- as.data.frame(installed.packages(lib.loc = "~/R/r4pi")[,c("Package", "Built", "Version")])
 
 
-ALL_OUTDATED_PACKAGES <- INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH]
-cat("Outdated packages:", ALL_OUTDATED_PACKAGES, "\n")
+ALL_OUTDATED_PACKAGES <- INSTALLED_PACKAGES[!startsWith(INSTALLED_PACKAGES$Built, paste("R", CURRENT_R_VERSION)),]
+
+cat("Outdated packages:\n")
+ALL_OUTDATED_PACKAGES
 # Only grab the first n packages that are outdated
-OUTDATED_PACKAGES <- sample(ALL_OUTDATED_PACKAGES, num_remove)
+OUTDATED_PACKAGES <- ALL_OUTDATED_PACKAGES[sample(nrow(ALL_OUTDATED_PACKAGES), num_remove), ]
 
 
-all_pkgs_versions <- data.frame(
-  "Package" = INSTALLED_PACKAGES[, "Package"][VERSIONS_MATCH],
-  "Version" = INSTALLED_PACKAGES[, "Version"][VERSIONS_MATCH]
-)
-
-pkgs_versions <- subset(all_pkgs_versions, Package %in% OUTDATED_PACKAGES)
-
-marked_for_removal <- apply(pkgs_versions, 1, function(x) {
-  paste0(x[1], "_", x[2], ".tar.gz")
+marked_for_removal <- apply(OUTDATED_PACKAGES, 1, function(x) {
+  paste0(x["Package"], "_", x["Version"], ".tar.gz")
 })
 marked_for_removal
 

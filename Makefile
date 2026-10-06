@@ -1,4 +1,4 @@
-all: pipeline-start packages.txt checks oldBuilt install deps download build prune PACKAGES html sync pipeline-stop
+all: pipeline-start packages.txt checks oldBuilt install deps download build PACKAGES html prune sync pipeline-stop
 
 pipeline-start: 01_is_running.sh
 	./01_is_running.sh start
@@ -28,14 +28,14 @@ download: baufabrik_packages.txt 40_pkg_src_download.R
 build: 50_pkg_build.R
 	./50_pkg_build.R
 
-prune: 55_prune_repo.R
-	./55_prune_repo.R
-
 PACKAGES: 60_pkg_write_packages.R
 	./60_pkg_write_packages.R
 
 html: 70_write_html_packages.R
 	./70_write_html_packages.R
+
+prune: 72_prune_repo.R
+	./72_prune_repo.R
 
 sync:
 	./75_repo_sync.sh
